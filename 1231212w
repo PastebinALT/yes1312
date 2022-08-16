@@ -1,0 +1,225 @@
+local toggles = {tommygun = false, shotgun = false, handgun = false, infectaura = false, branchaura = false}
+local whitelisted = {"Maryli05", "NotBaconJackBlox", "BanishedSpirits", "02sug", "KittyYurisa", "FrostBiteFuge", "wolfiegalowo", "XXxBlueberryCowxXxx", "KajaSoja", "ddreamhomeei", "KariJ2W", "princessunicornnyan2", "wyasmyn86", "jsosjxns", "pamsalgado", "Dog_goodme23", "keirapurplegem", "ayixe25"}
+
+local ESP = loadstring(game:HttpGet("https://kiriot22.com/releases/ESP.lua"))()
+ESP.Players = false
+ESP.Tracers = false
+ESP.Boxes = false
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "Infectious Smile", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+local Tab = Window:MakeTab({
+    Name = "Guns",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Misc = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local ESPS = Window:MakeTab({
+	Name = "ESP",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+function tableleContains(table, instance)
+    for i,v in pairs(table) do
+        if v == instance then
+            return true
+        end
+    end
+    return false
+end
+
+function tommygunskillall()
+    while toggles.tommygun and wait(0.05) do
+        spawn(function()
+            pcall(function()
+                for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                    if tableContains(whitelisted, v.Name) == false then
+                        local args = {
+                            [1] = game:GetService("Players")[v.Name].Character.Humanoid,
+                            [2] = game:GetService("Players")[v.Name].Character.Head,
+                            [3] = Vector3.new(-82.92900085449219, 4.31245231628418, -23.006166458129883)
+                        }
+                        game:GetService("Players").LocalPlayer.Character:FindFirstChild("Tommy Gun").DamageEvent:FireServer(unpack(args))
+                    end
+                end
+            end)
+        end)
+    end
+end
+
+Tab:AddToggle({
+	Name = "Tommy Gun",
+	Default = false,
+	Callback = function(Value)
+		toggles.tommygun = Value
+        tommygunskillall()
+	end    
+})
+
+function tableContains(table, instance)
+    for i,v in pairs(table) do
+        if v == instance then
+            return true
+        end
+    end
+    return false
+end
+
+function shotgunskillall()
+    while toggles.shotgun and wait(0.05) do
+        spawn(function()
+            pcall(function()
+                for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                    if tableContains(whitelisted, v.Name) == false then
+                        local args = {
+                            [1] = game:GetService("Players")[v.Name].Character.Humanoid,
+                            [2] = game:GetService("Players")[v.Name].Character.Head,
+                            [3] = Vector3.new(-82.92900085449219, 4.31245231628418, -23.006166458129883)
+                        }
+                        game:GetService("Players").LocalPlayer.Character.Shotgun.DamageEvent:FireServer(unpack(args))
+                    end
+                end
+            end)
+        end)
+    end
+end
+
+Tab:AddToggle({
+    Name = "Shotgun",
+    Default = false,
+    Callback = function(Value)
+        toggles.shotgun = Value
+        shotgunskillall()
+    end
+})
+
+function tableContains(table, instance)
+    for i,v in pairs(table) do
+        if v == instance then
+            return true
+        end
+    end
+    return false
+end
+
+function handgunskillall()
+    while toggles.handgun and task.wait(0.025) do
+        spawn(function()
+            pcall(function()
+                for i, v in pairs(game:GetService("Players"):GetChildren()) do
+                    if tableContains(whitelisted, v.Name) == false then
+                        local args = {
+                            [1] = game:GetService("Players")[v.Name].Character.Humanoid,
+                            [2] = game:GetService("Players")[v.Name].Character.Head,
+                            [3] = Vector3.new(-82.92900085449219, 4.31245231628418, -23.006166458129883)
+                        }
+                        game:GetService("Players").LocalPlayer.Character.Handgun.DamageEvent:FireServer(unpack(args))
+                    end
+                end
+            end)
+        end)
+    end
+end
+
+Tab:AddToggle({
+    Name = "Handgun",
+    Default = false,
+    Callback = function(Value)
+        toggles.handgun = Value
+        handgunskillall()
+    end
+})
+
+Misc:AddButton({
+	Name = "Copy Sugar Crash",
+	Callback = function()
+        setclipboard(6875625578)
+  	end    
+})
+
+Misc:AddButton({
+	Name = "Destroy AntiHack",
+	Callback = function()
+        game:GetService("Workspace").Map.KillBricks:Destroy()
+        wait(0.25)
+        game:GetService("Workspace").Map.AntiHack:Destroy()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "Copy Safe Code",
+	Callback = function()
+        setclipboard(game:GetService("Workspace").Map.System["Raided Hideout"].Safe.Part.safeCode.Value)
+  	end    
+})
+
+Misc:AddToggle({
+	Name = "Infect Aura",
+	Default = false,
+	Callback = function(Value)
+		toggles.infectaura = Value
+        while toggles.infectaura and task.wait(0.05) do
+            spawn(function()
+                pcall(function()
+                    game:GetService("Players").LocalPlayer.Character.Infected.InfectEvent:FireServer()
+                end)
+            end)
+        end
+	end    
+})
+
+Misc:AddToggle({
+	Name = "Branch Aura",
+	Default = false,
+	Callback = function(Value)
+		toggles.branchaura = Value
+        while toggles.branchaura and task.wait(0.05) do
+            spawn(function()
+                pcall(function()
+                    game:GetService("Players").LocalPlayer.Character.Branch.SwingEvent:FireServer()
+                end)
+            end)
+        end
+	end    
+})
+
+ESPS:AddToggle({
+	Name = "Esp",
+	Default = false,
+	Callback = function(Value)
+		ESP:Toggle(Value)
+	end    
+})
+
+ESPS:AddToggle({
+	Name = "Players",
+	Default = false,
+	Callback = function(Value)
+		ESP.Players = Value
+	end    
+})
+
+ESPS:AddToggle({
+	Name = "Boxes",
+	Default = false,
+	Callback = function(Value)
+		ESP.Boxes = Value
+	end    
+})
+
+ESPS:AddToggle({
+	Name = "Tracers",
+	Default = false,
+	Callback = function(Value)
+		ESP.Tracers = Value
+	end    
+})
